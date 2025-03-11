@@ -4,5 +4,5 @@ require("paulo.lazy")
 require("paulo.lsp")
 
 -- loads theme
-vim.cmd("colorscheme catppuccin")
+vim.cmd("colorscheme kanagawa")
 

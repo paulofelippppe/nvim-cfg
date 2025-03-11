@@ -40,3 +40,4 @@ vim.g.mapleader = " "
 
 vim.o.splitright = true
 vim.o.wrap = true
+
