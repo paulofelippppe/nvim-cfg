@@ -5,3 +5,4 @@ require("paulo.lsp")
 
 -- loads theme
 vim.cmd("colorscheme catppuccin")
+
