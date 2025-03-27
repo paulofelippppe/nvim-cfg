@@ -1,53 +1,53 @@
-    local lspconfig = require("lspconfig")
-    local cmpnvim = require("cmp_nvim_lsp")
+local lspconfig = require("lspconfig")
+local cmpnvim = require("cmp_nvim_lsp")
 
-    -- Setup of LSP
-    local lspconfig_defaults = lspconfig.util.default_config
-    lspconfig_defaults.capabilities =
-        vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, cmpnvim.default_capabilities())
+-- Setup of LSP
+local lspconfig_defaults = lspconfig.util.default_config
+lspconfig_defaults.capabilities =
+vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, cmpnvim.default_capabilities())
 
-    vim.api.nvim_create_autocmd("LspAttach", {
-        desc = "LSP actions",
-        callback = function(event)
-            local opts = { buffer = event.buf }
+vim.api.nvim_create_autocmd("LspAttach", {
+    desc = "LSP actions",
+    callback = function(event)
+        local opts = { buffer = event.buf }
 
-            vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-            vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-            vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-            vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-            vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-            vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-            vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-            vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-            vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
-            vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+        vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+        vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+        vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+        vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+        vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+        vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+        vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+        vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+        vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+        vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+    end,
+})
+
+-- Setup of mason (language server handler)
+require("mason").setup({})
+require("mason-lspconfig").setup({
+    handlers = {
+        function(server_name)
+            lspconfig[server_name].setup({})
         end,
-    })
-
-    -- Setup of mason (language server handler)
-    require("mason").setup({})
-    require("mason-lspconfig").setup({
-        handlers = {
-            function(server_name)
-                lspconfig[server_name].setup({})
-            end,
-        },
-        ensure_installed = {
-            lua_ls = {},
-            html = { filetypes = { 'html', 'php' }}
-        },
-        automatic_installation = true,
-    })
-    require("mason-tool-installer").setup({
-        ensure_installed = {
-         "phpstan",
-         "cssls",
-         "eslint-lsp",
-         "eslint_d",
-         "lua-language-server",
-         "phpactor",
-         "typescript-language-server",
-        },
+    },
+    ensure_installed = {
+        lua_ls = {},
+        html = { filetypes = { 'html', 'php' }}
+    },
+    automatic_installation = false,
+})
+require("mason-tool-installer").setup({
+    ensure_installed = {
+        --         "phpstan",
+        --         "cssls",
+        --         "eslint-lsp",
+        --         "eslint_d",
+        --         "lua-language-server",
+        --         "phpactor",
+        --         "typescript-language-server",
+    },
 })
 
 -- Setup autocompletion
@@ -109,7 +109,13 @@ lspconfig.phpactor.setup({
 })
 
 -- Setup TS/JS language server
+--lspconfig.tsserver.setup({
+--    cmd = {'typescript-language-server', '--stdio'}
+--})
+
+
 lspconfig.ts_ls.setup({
+    cmd = {'typescript-language-server', '--stdio'},
 	init_options = {
 		preferences = {
 			includeInlayFunctionParameterTypeHints = true,
@@ -121,16 +127,16 @@ lspconfig.ts_ls.setup({
 		},
 	},
 })
-
--- Setup Eslint
-lspconfig.eslint.setup({
-	on_attach = function(client, bufnr)
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			buffer = bufnr,
-			command = "EslintFixAll",
-		})
-	end,
-})
+--
+---- Setup Eslint
+--lspconfig.eslint.setup({
+--	on_attach = function(client, bufnr)
+--		vim.api.nvim_create_autocmd("BufWritePre", {
+--			buffer = bufnr,
+--			command = "EslintFixAll",
+--		})
+--	end,
+--})
 
 -- Setup HTML support
 require('nvim-ts-autotag').setup({})
