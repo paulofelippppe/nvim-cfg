@@ -25,6 +25,14 @@
 - `:tabedit /path/to/file`: opens the desired file in a new tab (same as :tabe)
 
 ## Plugin shortcuts
+### Harpoon
+- `<leader>a`: adds the file to the harpoon list
+- `<leader>r`: removes the file from the harpoon list
+- `<leader>h`: toggles the harpoon list
+- `<leader>[n]`: goes to the nth item of the list (max: 8)
+- `<C-n>`: goes to the next list's item
+- `<C-p>`: goes to the previous list's item
+
 ### Telescope
 - `<leader>ff`: find files
 - `<leader>fg`: live grep
