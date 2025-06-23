@@ -27,8 +27,8 @@ return {
         -- Harpoon customized shortcuts
         vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
         vim.keymap.set("n", "<leader>r", function() harpoon:list():remove() end)
-        --vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-        vim.keymap.set("n", "<leader>h", function() toggle_telescope(harpoon:list()) end)
+        vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+        vim.keymap.set("n", "<leader>t", function() toggle_telescope(harpoon:list()) end)
 
         for i=1,8 do
             vim.keymap.set("n", string.format("<leader>%d", i), function() harpoon:list():select(i) end)
