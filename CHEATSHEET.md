@@ -18,8 +18,10 @@
 - `{n}zt`: goes to nth line
 
 ### Text replacement and insertion
+- `a`: skips one char entering the insert mode
+- `o`: adds one blank line below entering the insert mode
+- `C`: deletes the whole line entering the insert mode
 - `R`: enters replacement mode - whatever you type replaces the text under the cursor
-
 
 ## Global commands
 - `:tabedit /path/to/file`: opens the desired file in a new tab (same as :tabe)
@@ -39,7 +41,9 @@
 
 ### nvim-tree
 Plugin for navigating through files
-Check: https://docs.rockylinux.org/books/nvchad/nvchad_ui/nvimtree/
+
+Check [this documentation](https://docs.rockylinux.org/books/nvchad/nvchad_ui/nvimtree/) for more.
+
 - `<leader>b`: toggles the file explorer (customized)
 - `a`: creates a new file or directory
 - `r`: rename file
@@ -56,7 +60,8 @@ Check: https://docs.rockylinux.org/books/nvchad/nvchad_ui/nvimtree/
 - `<C-v>`: opens the file under the cursor dividing it vertically in two parts
 - `<C-h>`: opens the file under the cursor dividing it horizontally in two parts
 - `<C-k>`: displays a brief info about the file
-- `-`: goes up one dir
+- `-`: goes up one dir (as root directory)
+- `<C-]>`: goes down one dir (as root directory)
 
 ### Toggleterm
 Plugin for opening a terminal instance inside neovim
