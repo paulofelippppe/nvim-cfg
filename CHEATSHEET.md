@@ -7,6 +7,7 @@
 
 ### Selection
 - `vap`: selects the current block
+- `viw`: selects the current word
 
 ### Page scrolling
 - `<C-e>`: scrolls down one line (or n lines)
@@ -22,6 +23,13 @@
 - `o`: adds one blank line below entering the insert mode
 - `C`: deletes the whole line entering the insert mode
 - `R`: enters replacement mode - whatever you type replaces the text under the cursor
+
+### Text search
+- `#`: searches the word under the cursor backwards
+- `*`: searches the word under the cursor forwards
+- `/[word]`: searches by the text typed in the whole document
+- `n`: goes forward in [word] search
+- `N`: goes backward in [word] search
 
 ## Global commands
 - `:tabedit /path/to/file`: opens the desired file in a new tab (same as :tabe)
