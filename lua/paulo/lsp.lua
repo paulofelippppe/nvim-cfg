@@ -1,10 +1,7 @@
-local lspconfig = require("lspconfig")
 local cmpnvim = require("cmp_nvim_lsp")
 
 -- Setup of LSP
-local lspconfig_defaults = lspconfig.util.default_config
-lspconfig_defaults.capabilities =
-vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, cmpnvim.default_capabilities())
+vim.lsp.config('*', { cmd = true })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP actions",
@@ -29,7 +26,7 @@ require("mason").setup({})
 require("mason-lspconfig").setup({
     handlers = {
         function(server_name)
-            lspconfig[server_name].setup({})
+           vim.lsp.config[server_name].setup({})
         end,
     },
     ensure_installed = {
@@ -40,13 +37,13 @@ require("mason-lspconfig").setup({
 })
 require("mason-tool-installer").setup({
     ensure_installed = {
-        --         "phpstan",
-        --         "cssls",
-        --         "eslint-lsp",
-        --         "eslint_d",
-        --         "lua-language-server",
-        --         "phpactor",
-        --         "typescript-language-server",
+        "phpstan",
+        "cssls",
+        "eslint-lsp",
+        "eslint_d",
+        "lua-language-server",
+        "phpactor",
+        "typescript-language-server",
     },
 })
 
@@ -80,63 +77,6 @@ cmp.setup({
 		end,
 	},
 })
-
--- Setup lua_ls
-lspconfig.lua_ls.setup{
-    settings = {
-        Lua = {
-            diagnostics = {
-                disable = {
-                    "missing-fields",
-                    "lowercase-global"
-                }
-            }
-        }
-    }
-}
-
--- Setup phpactor
-lspconfig.phpactor.setup({
-	cmd = { "phpactor", "language-server" },
-	filetypes = { "php" },
-	root_dir = lspconfig.util.root_pattern('.git', '.phpactor.json', '.phpactor.yml'),
-	init_options = {
-        ["language_server.diagnostics_on_update"] = false,
-        ["language_server.diagnostics_on_open"] = false,
-        ["language_server.diagnostics_on_save"] = false,
-		["language_server_phpstan.enabled"] = true,
-	},
-})
-
--- Setup TS/JS language server
---lspconfig.tsserver.setup({
---    cmd = {'typescript-language-server', '--stdio'}
---})
-
-
-lspconfig.ts_ls.setup({
-    cmd = {'typescript-language-server', '--stdio'},
-	init_options = {
-		preferences = {
-			includeInlayFunctionParameterTypeHints = true,
-			includeInlayEnumMemberValueHints = true,
-			includeInlayFunctionLikeReturnTypeHints = true,
-			includeInlayVariableTypeHints = true,
-			includeInlayPropertyDeclarationTypeHints = true,
-			includeInlayParameterNameHints = "all",
-		},
-	},
-})
---
----- Setup Eslint
---lspconfig.eslint.setup({
---	on_attach = function(client, bufnr)
---		vim.api.nvim_create_autocmd("BufWritePre", {
---			buffer = bufnr,
---			command = "EslintFixAll",
---		})
---	end,
---})
 
 -- Setup HTML support
 require('nvim-ts-autotag').setup({})

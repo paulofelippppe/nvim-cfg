@@ -11,7 +11,7 @@ There are a few packages that you must install in order to work out smoothly.
 - *ripgrep*
 - ...
 
-Configuration requires neovim >= 0.10.
+Configuration requires neovim >= 0.11.
 
 # Plugins
 Set of plugins used (because i like to track it and not feelin lost).
