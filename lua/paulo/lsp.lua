@@ -21,6 +21,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+-- Setup of php-actor
+vim.lsp.config('phpactor', {
+    init_options = {
+        ["language_server.diagnostics_on_update"] = false,
+        ["language_server.diagnostics_on_save"] = false,
+        ["language_server.diagnostics_on_open"] = false
+    }
+})
+
 -- Setup of mason (language server handler)
 require("mason").setup({})
 require("mason-lspconfig").setup({
@@ -35,6 +44,7 @@ require("mason-lspconfig").setup({
     },
     automatic_installation = false,
 })
+
 require("mason-tool-installer").setup({
     ensure_installed = {
         "phpstan",
@@ -76,6 +86,11 @@ cmp.setup({
 			vim.snippet.expand(args.body)
 		end,
 	},
+    window = {
+        documentation = {
+            border = {"╔", "═" ,"╗", "║", "╝", "═", "╚", "║"}
+        }
+    }
 })
 
 -- Setup HTML support
