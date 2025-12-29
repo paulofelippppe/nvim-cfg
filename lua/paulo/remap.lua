@@ -1,5 +1,6 @@
 vim.keymap.set("n", "<leader>b", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
+vim.keymap.set("v", "<leader>c", "\"+y")
 
 -- Move the selected text upward or downward
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
