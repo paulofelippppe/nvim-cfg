@@ -2,6 +2,9 @@ vim.keymap.set("n", "<leader>b", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
 vim.keymap.set("v", "<leader>c", "\"+y")
 
+-- Triggers LSP diagnostic message under the cursor
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic window" })
+
 -- Move the selected text upward or downward
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
